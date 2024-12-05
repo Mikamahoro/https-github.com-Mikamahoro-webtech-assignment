@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" type="image/svg+xml">
+    <title>React App</title>
+    <meta charset="UTF-8">
+<!--    <title>Manager Page</title>-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #007bff; /* Consistent blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #ffffff; /* White text for readability */
+        }
+        .container {
+            background-color: #ffffff; /* White background for the content container */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            color: #333333; /* Darker text inside container */
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to the Manager Page</h1>
+    <div>
+        <p th:text="${message}"></p>
+    </div>
+    <p><a th:href="@{/logout}">Logout</a></p>
+</div>
+
+</body>
+</html>

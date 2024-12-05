@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" type="image/svg+xml">
+    <title>React App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <title>Expense Trucker</title>-->
+    <style>
+        /* Modern and clean design styles */
+        :root {
+            /* Color Palette */
+            --primary-color: #2C3E50;
+            --secondary-color: #3498DB;
+            --accent-color: #E74C3C;
+            --background-color: #ECF0F1;
+            --text-color: #333;
+            --light-text: #fff;
+
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--secondary-color);
+            padding: 1rem 2rem;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-right a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-right a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-content {
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .section-content h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--light-text);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Language Selector */
+        .language-selector {
+            background-color: var(--light-text);
+            border-radius: 4px;
+            padding: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            main {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<header>
+    <h1 data-lang-key="headerTitle">Welcome to Expense Tracker</h1>
+</header>
+
+<!-- Navigation Bar -->
+<nav>
+    <div class="nav-right">
+        <a data-lang-key="navRegister" th:href="@{/register}">Register</a>
+        <a data-lang-key="navLogin" th:href="@{/login}">Login</a>
+    </div>
+    <div class="language-selector">
+        <select id="language-select" class="form-select" aria-label="Language select">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+        </select>
+    </div>
+</nav>
+
+<!-- Main Section -->
+<main>
+    <h1 data-lang-key="mainTitle">Track Your Expenses Easily</h1>
+    <p data-lang-key="mainDescription">Monitor, manage, and optimize your expenses. Keep your financial goals in check with Expense Trucker.</p>
+
+    <div class="section-content">
+        <h2 data-lang-key="whyUse">Why Use Expense Tracker?</h2>
+        <p data-lang-key="whyUseDescription">Expense Tracker provides you with a comprehensive system to manage your personal or business expenses efficiently. Categorize, track, and analyze your spending patterns to make informed financial decisions.</p>
+
+        <h2 data-lang-key="howItWorks">How It Works</h2>
+        <p data-lang-key="howItWorksDescription">Register and start adding your expenses. View categorized reports, analyze spending trends, and stay on top of your finances effortlessly.</p>
+    </div>
+
+    <a data-lang-key="btnStartTracking" th:href="@{/register}" class="btn">Start Tracking Expenses</a>
+    <a data-lang-key="btnViewReports" th:href="@{/admin}" class="btn">View Reports</a>
+</main>
+
+<!-- Footer Section -->
+<footer>
+    <p>&copy; 2024 Expense Trucker. <span data-lang-key="footerRights">All rights reserved.</span></p>
+    <p><a data-lang-key="footerPrivacy" href="#">Privacy Policy</a> | <a data-lang-key="footerTerms" href="#">Terms of Service</a></p>
+</footer>
+
+<script>
+    const translations = {
+        en: {
+            headerTitle: "Welcome to Expense Trucker",
+            navAdmin: "Admin",
+            navAddExpense: "Add Expense",
+            navReports: "Reports",
+            navRegister: "Register",
+            navLogin: "Login",
+            mainTitle: "Track Your Expenses Easily",
+            mainDescription: "Monitor, manage, and optimize your expenses. Keep your financial goals in check with Expense Trucker.",
+            whyUse: "Why Use Expense Trucker?",
+            whyUseDescription: "Expense Trucker provides you with a comprehensive system to manage your personal or business expenses efficiently. Categorize, track, and analyze your spending patterns to make informed financial decisions.",
+            howItWorks: "How It Works",
+            howItWorksDescription: "Register and start adding your expenses. View categorized reports, analyze spending trends, and stay on top of your finances effortlessly.",
+            btnStartTracking: "Start Tracking Expenses",
+            btnViewReports: "View Reports",
+            footerRights: "All rights reserved.",
+            footerPrivacy: "Privacy Policy",
+            footerTerms: "Terms of Service"
+        },
+        fr: {
+            headerTitle: "Bienvenue à Expense Trucker",
+            navAdmin: "Admin",
+            navAddExpense: "Ajouter des dépenses",
+            navReports: "Rapports",
+            navRegister: "S'inscrire",
+            navLogin: "Se connecter",
+            mainTitle: "Suivez facilement vos dépenses",
+            mainDescription: "Surveillez, gérez et optimisez vos dépenses. Gardez vos objectifs financiers en vue avec Expense Trucker.",
+            whyUse: "Pourquoi utiliser Expense Trucker?",
+            whyUseDescription: "Expense Trucker vous offre un système complet pour gérer vos dépenses personnelles ou professionnelles efficacement. Catégorisez, suivez et analysez vos habitudes de dépenses pour prendre des décisions financières éclairées.",
+            howItWorks: "Comment ça fonctionne",
+            howItWorksDescription: "Inscrivez-vous et commencez à ajouter vos dépenses. Consultez des rapports catégorisés, analysez les tendances de dépenses et restez maître de vos finances sans effort.",
+            btnStartTracking: "Commencez à suivre les dépenses",
+            btnViewReports: "Voir les rapports",
+            footerRights: "Tous droits réservés.",
+            footerPrivacy: "Politique de confidentialité",
+            footerTerms: "Conditions d'utilisation"
+        },
+        es: {
+            headerTitle: "Bienvenido a Expense Trucker",
+            navAdmin: "Admin",
+            navAddExpense: "Agregar gasto",
+            navReports: "Informes",
+            navRegister: "Registrarse",
+            navLogin: "Iniciar sesión",
+            mainTitle: "Rastree sus gastos fácilmente",
+            mainDescription: "Monitoree, gestione y optimice sus gastos. Mantenga sus objetivos financieros bajo control con Expense Trucker.",
+            whyUse: "¿Por qué usar Expense Trucker?",
+            whyUseDescription: "Expense Trucker le proporciona un sistema completo para gestionar sus gastos personales o empresariales de manera eficiente. Categorice, rastree y analice sus patrones de gasto para tomar decisiones financieras informadas.",
+            howItWorks: "Cómo funciona",
+            howItWorksDescription: "Regístrese y comience a agregar sus gastos. Vea informes categorizados, analice las tendencias de gastos y mantenga el control de sus finanzas sin esfuerzo.",
+            btnStartTracking: "Comience a rastrear gastos",
+            btnViewReports: "Ver informes",
+            footerRights: "Todos los derechos reservados.",
+            footerPrivacy: "Política de privacidad",
+            footerTerms: "Términos de servicio"
+        }
+    };
+
+    function loadLanguage(language) {
+        const elements = document.querySelectorAll('[data-lang-key]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-lang-key');
+            if (translations[language] && translations[language][key]) {
+                el.textContent = translations[language][key];
+            }
+        });
+    }
+
+    document.getElementById('language-select').addEventListener('change', function () {
+        const selectedLanguage = this.value;
+        localStorage.setItem('language', selectedLanguage);
+        loadLanguage(selectedLanguage);
+    });
+
+    window.onload = function() {
+        const savedLanguage = localStorage.getItem('language') || 'en';
+        document.getElementById('language-select').value = savedLanguage;
+        loadLanguage(savedLanguage);
+    };
+</script>
+
+</body>
+</html>

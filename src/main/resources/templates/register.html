@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" type="image/svg+xml">
+    <title>React App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <title>Register</title>-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #007bff; /* Consistent blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #ffffff; /* White text for readability */
+        }
+        .container {
+            background-color: #ffffff; /* White background for form container */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+            color: #000000; /* Black text inside form */
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        p {
+            margin-top: 15px;
+            color: #555;
+        }
+        a {
+            color: #0056b3; /* Slightly darker blue for links */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .message {
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+    <form action="#" th:action="@{/register}" method="post" th:object="${user}">
+        <input type="text" th:field="*{username}" placeholder="Username" required>
+        <input type="email" th:field="*{email}" placeholder="Email" required>
+        <input type="password" th:field="*{password}" placeholder="Password" required>
+
+        <!-- Role selection -->
+        <select th:field="*{role}" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="ROLE_USER">Customer</option>
+            <option value="ROLE_MANAGER">Manager</option>
+        </select>
+
+        <button type="submit">Register</button>
+    </form>
+    <p class="message" th:text="${message}"></p>
+    <p><a th:href="@{/login}">Already have an account? Log in</a></p>
+</div>
+
+</body>
+</html>

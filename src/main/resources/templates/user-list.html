@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" type="image/svg+xml">
+    <title>React App</title>
+<!--    <title>User List</title>-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #007bff; /* Consistent blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff; /* White text for readability */
+        }
+
+        .container {
+            background-color: #ffffff; /* White background for the table container */
+            padding: 30px; /* Increased padding for more space */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow effect for depth */
+            width: 90%; /* Responsive width */
+            max-width: 800px; /* Maximum width */
+            color: #000000; /* Black text inside table */
+        }
+
+        h2 {
+            color: #333333; /* Darker color for heading */
+            text-align: center; /* Center the heading */
+            margin-bottom: 20px; /* Space below the heading */
+        }
+
+        .table th,
+        .table td {
+            text-align: center; /* Center text inside table cells */
+            vertical-align: middle; /* Align vertically to the middle */
+        }
+
+        .table th {
+            background-color: #343a40; /* Darker background for table header */
+            color: #ffffff; /* White text for table header */
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa; /* Light gray for odd rows */
+        }
+
+        .table-bordered {
+            border: 2px solid #007bff; /* Blue border for the table */
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #007bff; /* Blue border for table cells */
+        }
+
+        .alert {
+            margin-top: 20px; /* Space above alert */
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container mt-4">
+    <h2> List </h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.phoneNumber}"></td>
+            <td th:text="${user.role}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

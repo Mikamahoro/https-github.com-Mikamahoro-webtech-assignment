@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" type="image/svg+xml">
+    <title>React App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <title>Manager Page</title>-->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: rgb(10, 95, 189);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .container {
+            padding: 2rem;
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        #user-notifications {
+            margin-top: 2rem;
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h3 {
+            margin: 0 0 1rem;
+        }
+        .notification-item {
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        a {
+            color: rgb(10, 95, 189);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Manager Dashboard</h1>
+</header>
+
+<div class="container">
+    <h2>Welcome to the Manager Page</h2>
+    <div>
+        <p th:text="${message}">Here you can manage expenses and monitor your team's performance.</p>
+    </div>
+
+    <p><a th:href="@{/logout}">Logout</a></p>
+
+    <div id="user-notifications">
+        <h3>Notifications <span id="notification-count"></span></h3>
+        <div id="user-notification-list">
+            <!-- Notifications will be appended here by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Expense Trucker. All rights reserved.</p>
+</footer>
+
+<script>
+    async function fetchUserNotifications() {
+        const response = await fetch('/notifications/user/unread');
+        const notifications = await response.json();
+        const notificationListDiv = document.getElementById('user-notification-list');
+
+        notificationListDiv.innerHTML = ''; // Clear previous notifications
+        notifications.forEach(notification => {
+            const notificationItem = document.createElement('div');
+            notificationItem.className = 'notification-item';
+            notificationItem.innerHTML = `
+                <strong>${notification.title}</strong>
+                <p>${notification.message}</p>
+            `;
+            notificationListDiv.appendChild(notificationItem);
+        });
+
+        // Update unread notification count
+        document.getElementById('notification-count').innerText = notifications.length;
+
+        // Mark notifications as read after displaying
+        markAllNotificationsAsRead();
+    }
+
+    async function markAllNotificationsAsRead() {
+        await fetch('/notifications/user/mark-all-as-read', { method: 'PUT' });
+    }
+
+    // Fetch notifications on page load
+    window.onload = fetchUserNotifications;
+</script>
+
+</body>
+</html>
